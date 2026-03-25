@@ -112,6 +112,12 @@ const GlobalStyles = () => (
   `}</style>
 );
 
+type LightboxItem = {
+  type: string;
+  src: string;
+  label: string;
+  cat: string;
+};
 /* ─────────────────────────────────────────────
    ANIMATED COUNTER
 ───────────────────────────────────────────── */
@@ -508,7 +514,7 @@ const Services = () => {
 ───────────────────────────────────────────── */
 const Gallery = () => {
   const [filter, setFilter] = useState("all");
-  const [lightbox, setLightbox] = useState(null);
+  const [lightbox, setLightbox] = useState<LightboxItem | null>(null);
 
   // All images verified working from Unsplash
   const media = [
