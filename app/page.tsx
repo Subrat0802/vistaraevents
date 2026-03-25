@@ -118,6 +118,14 @@ type LightboxItem = {
   label: string;
   cat: string;
 };
+
+type FormType = {
+  first: string;
+  last: string;
+  email: string;
+  event: string;
+  message: string;
+};
 /* ─────────────────────────────────────────────
    ANIMATED COUNTER
 ───────────────────────────────────────────── */
@@ -744,7 +752,13 @@ const Testimonials = () => {
 ───────────────────────────────────────────── */
 const Contact = () => {
   const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ first:"", last:"", email:"", event:"", message:"" });
+  const [form, setForm] = useState<FormType>({
+  first: "",
+  last: "",
+  email: "",
+  event: "",
+  message: ""
+});
 
   return (
     <section id="contact" style={{ padding:"8rem 2rem", background:"#fff", position:"relative", overflow:"hidden" }}>
