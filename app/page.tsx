@@ -766,6 +766,32 @@ const Contact = () => {
       <div className="two-col" style={{ maxWidth:1200, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5rem", alignItems:"start" }}>
 
         {/* LEFT SIDE — unchanged */}
+        <motion.div initial={{ opacity:0, x:-28 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
+          <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1.25rem" }}>Let's Connect</span>
+          <h2 className="serif" style={{ fontSize:"clamp(2.5rem,5vw,4.5rem)", color:"var(--charcoal)", fontWeight:300, lineHeight:1.05, marginBottom:"1.5rem" }}>
+            Ready to Craft<br /><span style={{ fontStyle:"italic", color:"var(--gold)" }}>Your Story?</span>
+          </h2>
+          <p style={{ color:"var(--muted)", lineHeight:1.9, marginBottom:"3rem", maxWidth:400, fontWeight:300, fontSize:"0.95rem" }}>
+            Reach out to us to begin planning your extraordinary event in Rewa, Satna, Sidhi, or Jabalpur. We accept a limited number of commissions each year to ensure uncompromising quality.
+          </p>
+
+          {[
+            { icon:Phone,  label:"Call Us",   val:"+91 91799 99927" },
+            { icon:Mail,   label:"Email Us",  val:"hello@vistaraevents.com" },
+            { icon:MapPin, label:"Visit Us",  val:"4th Floor, Sneh Aspire, Rewa (M.P.)" },
+          ].map(({ icon:Icon, label, val },i) => (
+            <motion.div key={i} initial={{ opacity:0, x:-16 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.15+i*0.1, duration:0.6 }}
+              style={{ display:"flex", alignItems:"center", gap:18, marginBottom:"1.75rem" }}>
+              <div style={{ width:44, height:44, borderRadius:"50%", border:"1px solid rgba(201,168,76,0.3)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--gold)", flexShrink:0 }}>
+                <Icon size={18} />
+              </div>
+              <div>
+                <p style={{ fontSize:9, color:"var(--muted)", textTransform:"uppercase", letterSpacing:"0.25em", marginBottom:3 }}>{label}</p>
+                <p className="serif" style={{ color:"var(--charcoal)", letterSpacing:"0.04em" }}>{val}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* RIGHT SIDE */}
         <motion.div
