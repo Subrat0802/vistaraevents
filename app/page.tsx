@@ -287,8 +287,12 @@ const Navbar = () => {
               <motion.a key={l.name} href={l.href} onClick={() => setOpen(false)}
                 initial={{ opacity:0, x:30 }} animate={{ opacity:1, x:0 }} transition={{ delay:i*0.07 }}
                 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(2rem,8vw,3.5rem)", color:"#F9F5EE", textDecoration:"none", fontStyle:"italic", fontWeight:300, borderBottom:"1px solid rgba(249,245,238,0.08)", padding:"1rem 0", display:"block", transition:"color 0.3s" }}
-                onMouseEnter={e => e.target.style.color="var(--gold)"}
-                onMouseLeave={e => e.target.style.color="#F9F5EE"}
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  e.currentTarget.style.color = "var(--gold)";
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  e.currentTarget.style.color = "#F9F5EE";
+                }}
               >{l.name}</motion.a>
             ))}
 
