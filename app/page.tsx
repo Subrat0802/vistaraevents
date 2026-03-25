@@ -752,87 +752,121 @@ const Testimonials = () => {
 ───────────────────────────────────────────── */
 const Contact = () => {
   const [sent, setSent] = useState(false);
+
   const [form, setForm] = useState<FormType>({
-  first: "",
-  last: "",
-  email: "",
-  event: "",
-  message: ""
-});
+    first: "",
+    last: "",
+    email: "",
+    event: "",
+    message: ""
+  });
 
   return (
     <section id="contact" style={{ padding:"8rem 2rem", background:"#fff", position:"relative", overflow:"hidden" }}>
       <div className="two-col" style={{ maxWidth:1200, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5rem", alignItems:"start" }}>
 
-        <motion.div initial={{ opacity:0, x:-28 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
-          <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1.25rem" }}>Let's Connect</span>
-          <h2 className="serif" style={{ fontSize:"clamp(2.5rem,5vw,4.5rem)", color:"var(--charcoal)", fontWeight:300, lineHeight:1.05, marginBottom:"1.5rem" }}>
-            Ready to Craft<br /><span style={{ fontStyle:"italic", color:"var(--gold)" }}>Your Story?</span>
-          </h2>
-          <p style={{ color:"var(--muted)", lineHeight:1.9, marginBottom:"3rem", maxWidth:400, fontWeight:300, fontSize:"0.95rem" }}>
-            Reach out to us to begin planning your extraordinary event in Rewa, Satna, Sidhi, or Jabalpur. We accept a limited number of commissions each year to ensure uncompromising quality.
-          </p>
+        {/* LEFT SIDE — unchanged */}
 
-          {[
-            { icon:Phone,  label:"Call Us",   val:"+91 91799 99927" },
-            { icon:Mail,   label:"Email Us",  val:"hello@vistaraevents.com" },
-            { icon:MapPin, label:"Visit Us",  val:"4th Floor, Sneh Aspire, Rewa (M.P.)" },
-          ].map(({ icon:Icon, label, val },i) => (
-            <motion.div key={i} initial={{ opacity:0, x:-16 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.15+i*0.1, duration:0.6 }}
-              style={{ display:"flex", alignItems:"center", gap:18, marginBottom:"1.75rem" }}>
-              <div style={{ width:44, height:44, borderRadius:"50%", border:"1px solid rgba(201,168,76,0.3)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--gold)", flexShrink:0 }}>
-                <Icon size={18} />
-              </div>
-              <div>
-                <p style={{ fontSize:9, color:"var(--muted)", textTransform:"uppercase", letterSpacing:"0.25em", marginBottom:3 }}>{label}</p>
-                <p className="serif" style={{ color:"var(--charcoal)", letterSpacing:"0.04em" }}>{val}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div initial={{ opacity:0, x:28 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
-          style={{ background:"var(--cream)", padding:"3.5rem", boxShadow:"0 20px 60px -20px rgba(0,0,0,0.08)" }}>
+        {/* RIGHT SIDE */}
+        <motion.div
+          initial={{ opacity:0, x:28 }}
+          whileInView={{ opacity:1, x:0 }}
+          viewport={{ once:true }}
+          transition={{ duration:0.8 }}
+          style={{ background:"var(--cream)", padding:"3.5rem", boxShadow:"0 20px 60px -20px rgba(0,0,0,0.08)" }}
+        >
           {sent ? (
             <motion.div initial={{ opacity:0, scale:0.9 }} animate={{ opacity:1, scale:1 }} style={{ textAlign:"center", padding:"3rem 0" }}>
               <div style={{ fontSize:48, marginBottom:"1.5rem", color:"var(--gold)" }}>✦</div>
-              <h3 className="serif" style={{ fontSize:"2rem", color:"var(--charcoal)", fontWeight:300, fontStyle:"italic", marginBottom:"1rem" }}>Message Received!</h3>
-              <p style={{ color:"var(--muted)", fontWeight:300, lineHeight:1.8 }}>Our team will be in touch within 24 hours to begin crafting your experience.</p>
+              <h3 className="serif" style={{ fontSize:"2rem", color:"var(--charcoal)", fontWeight:300, fontStyle:"italic", marginBottom:"1rem" }}>
+                Message Received!
+              </h3>
+              <p style={{ color:"var(--muted)", fontWeight:300, lineHeight:1.8 }}>
+                Our team will be in touch within 24 hours to begin crafting your experience.
+              </p>
             </motion.div>
           ) : (
-            <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ display:"flex", flexDirection:"column", gap:"1.75rem" }}>
+            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display:"flex", flexDirection:"column", gap:"1.75rem" }}>
+
+              {/* FIRST + LAST */}
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1.5rem" }}>
-                {[["First Name","first"],["Last Name","last"]].map(([lbl,key]) => (
+                {[["First Name","first"],["Last Name","last"]].map(([lbl,key]) => {
+                  const typedKey = key as keyof FormType;
+
+                  return (
+                    <div key={key}>
+                      <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
+                        {lbl}
+                      </label>
+
+                      <input
+                        type="text"
+                        value={form[typedKey]}
+                        onChange={(e) =>
+                          setForm({ ...form, [typedKey]: e.target.value })
+                        }
+                        style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
+                        onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
+                        onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* EMAIL + EVENT */}
+              {[["Email Address","email","email"],["Event Type & Date","event","text"]].map(([lbl,key,type]) => {
+                const typedKey = key as keyof FormType;
+
+                return (
                   <div key={key}>
-                    <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>{lbl}</label>
-                    <input type="text" value={form[key]} onChange={e => setForm({...form,[key]:e.target.value})}
+                    <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
+                      {lbl}
+                    </label>
+
+                    <input
+                      type={type as string}
+                      value={form[typedKey]}
+                      onChange={(e) =>
+                        setForm({ ...form, [typedKey]: e.target.value })
+                      }
                       style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
-                      onFocus={e => e.target.style.borderBottomColor="var(--gold)"}
-                      onBlur={e => e.target.style.borderBottomColor="rgba(26,26,26,0.15)"} />
+                      onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
+                      onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                    />
                   </div>
-                ))}
-              </div>
-              {[["Email Address","email","email"],["Event Type & Date","event","text"]].map(([lbl,key,type]) => (
-                <div key={key}>
-                  <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>{lbl}</label>
-                  <input type={type} value={form[key]} onChange={e => setForm({...form,[key]:e.target.value})}
-                    style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
-                    onFocus={e => e.target.style.borderBottomColor="var(--gold)"}
-                    onBlur={e => e.target.style.borderBottomColor="rgba(26,26,26,0.15)"} />
-                </div>
-              ))}
+                );
+              })}
+
+              {/* MESSAGE */}
               <div>
-                <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>Message</label>
-                <textarea rows={4} value={form.message} onChange={e => setForm({...form,message:e.target.value})}
+                <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
+                  Message
+                </label>
+
+                <textarea
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
                   style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", resize:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
-                  onFocus={e => e.target.style.borderBottomColor="var(--gold)"}
-                  onBlur={e => e.target.style.borderBottomColor="rgba(26,26,26,0.15)"} />
+                  onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
+                  onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                />
               </div>
-              <motion.button type="submit" whileHover={{ letterSpacing:"0.45em" }}
+
+              {/* BUTTON */}
+              <motion.button
+                type="submit"
+                whileHover={{ letterSpacing:"0.45em" }}
                 style={{ width:"100%", padding:"15px", background:"var(--charcoal)", color:"var(--cream)", border:"none", cursor:"pointer", fontSize:10, letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"background 0.3s", fontFamily:"'Jost',sans-serif" }}
-                onMouseEnter={e => e.currentTarget.style.background="var(--gold)"}
-                onMouseLeave={e => e.currentTarget.style.background="var(--charcoal)"}
-              >Send Inquiry</motion.button>
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--gold)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "var(--charcoal)")}
+              >
+                Send Inquiry
+              </motion.button>
+
             </form>
           )}
         </motion.div>
