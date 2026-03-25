@@ -904,10 +904,22 @@ const Footer = () => (
         <div>
           <h4 style={{ fontSize:9, letterSpacing:"0.35em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"1.5rem", fontWeight:500 }}>Quick Links</h4>
           {["Home","Our Soul","Services","Gallery","Connect"].map(link => (
-            <a key={link} href="#" style={{ display:"block", color:"rgba(249,245,238,0.4)", fontSize:"0.85rem", textDecoration:"none", marginBottom:"0.8rem", fontWeight:300, transition:"color 0.3s" }}
-              onMouseEnter={e => e.target.style.color="var(--gold)"}
-              onMouseLeave={e => e.target.style.color="rgba(249,245,238,0.4)"}
-            >{link}</a>
+            <a
+              key={link}
+              href="#"
+              style={{
+                display:"block",
+                color:"rgba(249,245,238,0.4)"
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.color = "var(--gold)";
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.color = "rgba(249,245,238,0.4)";
+              }}
+            >
+              {link}
+            </a>
           ))}
         </div>
 
