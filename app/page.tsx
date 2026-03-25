@@ -213,8 +213,12 @@ const Navbar = () => {
               >{l.name}</a>
             ))}
             <a href="#contact" style={{ fontSize:10, letterSpacing:"0.3em", textTransform:"uppercase", fontWeight:600, border:"1px solid var(--gold)", color:"var(--gold)", padding:"10px 22px", textDecoration:"none", transition:"all 0.3s" }}
-              onMouseEnter={e => { e.currentTarget.style.background="var(--gold)"; e.currentTarget.style.color="#fff"; }}
-              onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.color="var(--gold)"; }}
+              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.color = "var(--gold)";
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.color = navTextColor;
+              }}
             >Book Now</a>
           </div>
 
