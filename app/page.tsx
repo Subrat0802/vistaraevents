@@ -205,21 +205,54 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links */}
-          <div className="desktop-nav" style={{ gap:"2.5rem", alignItems:"center" }}>
+          <div className="desktop-nav" style={{ gap: "2.5rem", alignItems: "center" }}>
             {links.map(l => (
-              <a key={l.name} href={l.href} className="nav-link" style={{ fontSize:10, letterSpacing:"0.3em", textTransform:"uppercase", fontWeight:600, color: navTextColor, textDecoration:"none", transition:"color 0.3s" }}
-                onMouseEnter={e => e.target.style.color = "var(--gold)"}
-                onMouseLeave={e => e.target.style.color = navTextColor}
-              >{l.name}</a>
+              <a
+                key={l.name}
+                href={l.href}
+                className="nav-link"
+                style={{
+                  fontSize: 10,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  fontWeight: 600,
+                  color: navTextColor,
+                  textDecoration: "none",
+                  transition: "color 0.3s"
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  e.currentTarget.style.color = "var(--gold)";
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  e.currentTarget.style.color = navTextColor;
+                }}
+              >
+                {l.name}
+              </a>
             ))}
-            <a href="#contact" style={{ fontSize:10, letterSpacing:"0.3em", textTransform:"uppercase", fontWeight:600, border:"1px solid var(--gold)", color:"var(--gold)", padding:"10px 22px", textDecoration:"none", transition:"all 0.3s" }}
+
+            <a
+              href="#contact"
+              style={{
+                fontSize: 10,
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                border: "1px solid var(--gold)",
+                color: "var(--gold)",
+                padding: "10px 22px",
+                textDecoration: "none",
+                transition: "all 0.3s"
+              }}
               onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.currentTarget.style.color = "var(--gold)";
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.currentTarget.style.color = navTextColor;
               }}
-            >Book Now</a>
+            >
+              Book Now
+            </a>
           </div>
 
           {/* Mobile burger — always rendered, CSS shows/hides */}
