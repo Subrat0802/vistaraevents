@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import {
-  Camera, Play, Menu, X, ChevronRight, MapPin, Phone,
-  Star, Mail, ArrowRight, Video, Grid, Sparkles, ExternalLink
+  Camera, Play, Menu, X, MapPin, Phone,
+  Star, Mail, ArrowRight, Video, Grid, ExternalLink
 } from "lucide-react";
 
 /* ─────────────────────────────────────────────
@@ -97,17 +97,60 @@ const GlobalStyles = () => (
     .desktop-nav { display: flex; }
     .mob-btn     { display: none; }
 
+    @media (max-width: 1024px) {
+      .two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .gal-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; }
+    }
+
     @media (max-width: 768px) {
       .desktop-nav { display: none !important; }
       .mob-btn     { display: flex !important; align-items: center; justify-content: center; }
-      .two-col     { grid-template-columns: 1fr !important; gap: 3rem !important; }
-      .gal-grid    { grid-template-columns: 1fr 1fr !important; }
-      .stats-grid  { grid-template-columns: 1fr 1fr !important; }
+      .two-col     { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .gal-grid    { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+      .stats-grid  { grid-template-columns: 1fr 1fr !important; gap: 1.5rem !important; }
+      .srv-card { padding: 2rem 1.5rem !important; }
+      .pill { padding: 7px 16px; font-size: 9px; }
+    }
+
+    @media (max-width: 640px) {
+      .gal-grid  { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+      .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 1.5rem !important; }
+      .two-col { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .srv-card { padding: 1.5rem 1.25rem !important; }
     }
 
     @media (max-width: 480px) {
-      .gal-grid  { grid-template-columns: 1fr !important; }
-      .stats-grid { grid-template-columns: 1fr 1fr !important; }
+      body { font-size: 14px; }
+      .pill { padding: 6px 12px; font-size: 8px; gap: 4px; }
+      .srv-card { padding: 1.5rem 1.25rem !important; }
+      .gal-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+      .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+    }
+
+    /* ── Additional mobile responsiveness fixes ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; }
+    .contact-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; }
+
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr !important; }
+      .contact-name-row { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .footer-brand { grid-column: auto !important; }
+      .section-pad { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+      .header-mb { margin-bottom: 2.5rem !important; }
+      .contact-card { padding: 1.75rem 1.25rem !important; }
+      .nav-logo { font-size: 22px !important; letter-spacing: 0.2em !important; }
+    }
+
+    @media (max-width: 480px) {
+      .section-pad { padding-left: 1rem !important; padding-right: 1rem !important; }
+      .header-mb { margin-bottom: 2rem !important; }
+      .footer-pad { padding: 3rem 1rem 1.75rem !important; }
+      .footer-title { font-size: 28px !important; letter-spacing: 0.2em !important; }
+      .hero-pad { padding: 0 1rem !important; }
+      .mob-menu { padding: 2.5rem 1.5rem !important; }
     }
   `}</style>
 );
@@ -156,15 +199,15 @@ const Marquee = () => {
     "Product Launches","Farewell Parties","Reception Dinners","Cultural Festivals"
   ];
   return (
-    <div style={{ overflow:"hidden", background:"var(--charcoal)", padding:"20px 0", borderTop:"1px solid rgba(201,168,76,0.15)", borderBottom:"1px solid rgba(201,168,76,0.15)" }}>
+    <div style={{ overflow:"hidden", background:"var(--charcoal)", padding:"clamp(1rem, 3vw, 2rem) 0", borderTop:"1px solid rgba(201,168,76,0.15)", borderBottom:"1px solid rgba(201,168,76,0.15)" }}>
       <motion.div
         animate={{ x:["0%","-50%"] }}
         transition={{ duration:30, repeat:Infinity, ease:"linear" }}
-        style={{ display:"flex", gap:"3rem", width:"max-content", alignItems:"center" }}
+        style={{ display:"flex", gap:"clamp(1.5rem, 4vw, 3rem)", width:"max-content", alignItems:"center" }}
       >
         {[...items,...items].map((item,i) => (
           <React.Fragment key={i}>
-            <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(1.1rem,2.5vw,1.6rem)", fontStyle:"italic", fontWeight:300, color:"rgba(249,245,238,0.55)", whiteSpace:"nowrap", letterSpacing:"0.05em" }}>{item}</span>
+            <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(0.9rem, 2vw, 1.6rem)", fontStyle:"italic", fontWeight:300, color:"rgba(249,245,238,0.55)", whiteSpace:"nowrap", letterSpacing:"0.05em" }}>{item}</span>
             <span style={{ color:"var(--gold)", fontSize:"0.5rem", opacity:0.6 }}>✦</span>
           </React.Fragment>
         ))}
@@ -214,7 +257,7 @@ const Navbar = () => {
         <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 1.5rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
 
           {/* Logo */}
-          <a href="#" className="serif" style={{ fontSize:26, letterSpacing:"0.25em", color: navTextColor, textDecoration:"none", fontWeight:400, transition:"color 0.4s" }}>
+          <a href="#" className="serif nav-logo" style={{ fontSize:26, letterSpacing:"0.25em", color: navTextColor, textDecoration:"none", fontWeight:400, transition:"color 0.4s" }}>
             VISTARA
           </a>
 
@@ -253,16 +296,19 @@ const Navbar = () => {
                 textTransform: "uppercase",
                 fontWeight: 600,
                 border: "1px solid var(--gold)",
-                color: "var(--gold)",
+                color: scrolled ? "var(--charcoal)" : "var(--gold)",
+                background: "transparent",
                 padding: "10px 22px",
                 textDecoration: "none",
                 transition: "all 0.3s"
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                e.currentTarget.style.color = "var(--gold)";
+                e.currentTarget.style.background = "var(--gold)";
+                e.currentTarget.style.color = "#fff";
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                e.currentTarget.style.color = navTextColor;
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = scrolled ? "var(--charcoal)" : "var(--gold)";
               }}
             >
               Book Now
@@ -286,9 +332,10 @@ const Navbar = () => {
       <AnimatePresence>
         {open && (
           <motion.div
+            className="mob-menu"
             initial={{ x:"100%" }} animate={{ x:0 }} exit={{ x:"100%" }}
             transition={{ type:"spring", damping:25, stiffness:200 }}
-            style={{ position:"fixed", inset:0, zIndex:200, background:"var(--charcoal)", display:"flex", flexDirection:"column", padding:"3rem 2rem", justifyContent:"center" }}
+            style={{ position:"fixed", inset:0, zIndex:200, background:"var(--charcoal)", display:"flex", flexDirection:"column", padding:"3rem 2rem", justifyContent:"center", overflowY:"auto" }}
           >
             <button onClick={() => setOpen(false)} style={{ position:"absolute", top:"1.75rem", right:"1.75rem", background:"none", border:"1px solid rgba(249,245,238,0.15)", cursor:"pointer", color:"#F9F5EE", width:44, height:44, display:"flex", alignItems:"center", justifyContent:"center", transition:"border-color 0.3s" }}
               onMouseEnter={e => e.currentTarget.style.borderColor="var(--gold)"}
@@ -340,19 +387,20 @@ const Hero = () => {
       </motion.div>
       <div style={{ position:"absolute", inset:0, background:"linear-gradient(to bottom,rgba(10,8,6,0.25) 0%,rgba(10,8,6,0.05) 40%,rgba(10,8,6,0.65) 100%)" }} />
 
-      <motion.div style={{ opacity, position:"relative", zIndex:10, height:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", padding:"0 1.5rem" }}>
+      <motion.div className="hero-pad" style={{ opacity, position:"relative", zIndex:10, height:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", padding:"0 clamp(1rem, 5vw, 3rem)" }}>
 
         <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3, duration:0.9 }}>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"1rem", marginBottom:"1.5rem" }}>
-            <div style={{ height:1, width:50, background:"var(--gold)" }} />
-            <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold-light)", fontWeight:500 }}>Crafting Memorable Celebrations</span>
-            <div style={{ height:1, width:50, background:"var(--gold)" }} />
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"1rem", marginBottom:"1.5rem", flexWrap:"wrap" }}>
+            <div style={{ height:1, width:"clamp(30px, 8vw, 50px)", background:"var(--gold)" }} />
+            <span style={{ fontSize:"clamp(8px, 2vw, 10px)", letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold-light)", fontWeight:500, whiteSpace:"nowrap" }}>Crafting Memorable Celebrations</span>
+            <div style={{ height:1, width:"clamp(30px, 8vw, 50px)", background:"var(--gold)" }} />
           </div>
         </motion.div>
 
         <motion.h1 initial={{ opacity:0, y:50 }} animate={{ opacity:1, y:0 }} transition={{ duration:1.2, delay:0.5, ease:[0.25,0.1,0.25,1] }}
           className="serif"
           style={{ fontSize:"clamp(3rem,10vw,8rem)", color:"#F9F5EE", lineHeight:0.92, letterSpacing:"-0.02em", fontWeight:300, marginBottom:"1.5rem" }}
+          whileHover={{ letterSpacing: "-0.01em", color: "var(--gold-light)" }}
         >
           VISTARA<br /><span style={{ fontStyle:"italic" }}>Events</span>
         </motion.h1>
@@ -370,12 +418,12 @@ const Hero = () => {
         <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:1.65, duration:0.8 }}
           style={{ display:"flex", gap:"1rem", flexWrap:"wrap", justifyContent:"center" }}
         >
-          <a href="#contact" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--gold)", color:"#fff", padding:"13px 30px", textDecoration:"none", fontSize:10, letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"background 0.3s" }}
+          <a href="#contact" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--gold)", color:"#fff", padding:"clamp(11px, 2vw, 13px) clamp(20px, 4vw, 30px)", textDecoration:"none", fontSize:"clamp(9px, 1.5vw, 10px)", letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"background 0.3s", whiteSpace:"nowrap" }}
             onMouseEnter={e => e.currentTarget.style.background="var(--gold-light)"}
             onMouseLeave={e => e.currentTarget.style.background="var(--gold)"}
           >Plan Your Event <ArrowRight size={13} /></a>
 
-          <a href="#gallery" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"transparent", color:"#F9F5EE", border:"1px solid rgba(249,245,238,0.4)", padding:"13px 30px", textDecoration:"none", fontSize:10, letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"all 0.3s" }}
+          <a href="#gallery" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"transparent", color:"#F9F5EE", border:"1px solid rgba(249,245,238,0.4)", padding:"clamp(11px, 2vw, 13px) clamp(20px, 4vw, 30px)", textDecoration:"none", fontSize:"clamp(9px, 1.5vw, 10px)", letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"all 0.3s", whiteSpace:"nowrap" }}
             onMouseEnter={e => { e.currentTarget.style.borderColor="var(--gold)"; e.currentTarget.style.color="var(--gold)"; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(249,245,238,0.4)"; e.currentTarget.style.color="#F9F5EE"; }}
           ><Play size={13} fill="currentColor" /> View Our Work</a>
@@ -383,10 +431,10 @@ const Hero = () => {
       </motion.div>
 
       <motion.div animate={{ y:[0,12,0] }} transition={{ repeat:Infinity, duration:2.5, ease:"easeInOut" }}
-        style={{ position:"absolute", bottom:"2.5rem", left:"50%", transform:"translateX(-50%)", display:"flex", flexDirection:"column", alignItems:"center", gap:6, zIndex:10 }}
+        style={{ position:"absolute", bottom:"2.5rem", left:"50%", transform:"translateX(-50%)", display:"flex", flexDirection:"column", alignItems:"center", gap:6, zIndex:10, width:"100%", justifyContent:"center", padding:"0 1rem" }}
       >
-        <span style={{ fontSize:8, letterSpacing:"0.4em", textTransform:"uppercase", color:"rgba(249,245,238,0.4)" }}>Scroll</span>
-        <div style={{ width:1, height:56, background:"linear-gradient(to bottom,var(--gold),transparent)" }} />
+        <span style={{ fontSize:"clamp(7px,2vw,8px)", letterSpacing:"0.4em", textTransform:"uppercase", color:"rgba(249,245,238,0.4)", whiteSpace:"nowrap" }}>Scroll</span>
+        <div style={{ width:1, height:48, background:"linear-gradient(to bottom,var(--gold),transparent)" }} />
       </motion.div>
     </section>
   );
@@ -403,14 +451,32 @@ const Stats = () => {
     { to:50,  suffix:"+", label:"Expert Artisans" },
   ];
   return (
-    <section style={{ background:"var(--charcoal)", padding:"5rem 2rem" }}>
+    <section className="section-pad" style={{ background:"var(--charcoal)", padding:"clamp(3rem, 5vw, 5rem) 1.5rem" }}>
       <div className="stats-grid" style={{ maxWidth:1100, margin:"0 auto", display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:"2.5rem", textAlign:"center" }}>
         {stats.map((s,i) => (
-          <motion.div key={i} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1, duration:0.6 }}>
-            <div className="serif" style={{ fontSize:"clamp(2.6rem,5vw,4.5rem)", color:"var(--gold)", fontWeight:300, lineHeight:1 }}>
+          <motion.div key={i} 
+            initial={{ opacity:0, y:24, scale:0.9 }} 
+            whileInView={{ opacity:1, y:0, scale:1 }} 
+            viewport={{ once:true }} 
+            transition={{ delay:i*0.1, duration:0.6, type:"spring", stiffness:100 }}
+            whileHover={{ scale:1.05, transition: { duration: 0.3 } }}
+          >
+            <motion.div 
+              className="serif" 
+              style={{ fontSize:"clamp(2.6rem,5vw,4.5rem)", color:"var(--gold)", fontWeight:300, lineHeight:1 }}
+              animate={{ textShadow: ["0 0 0px rgba(201,168,76,0)", "0 0 12px rgba(201,168,76,0.4)", "0 0 0px rgba(201,168,76,0)"] }}
+              transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+            >
               <Counter to={s.to} suffix={s.suffix} />
-            </div>
-            <div style={{ width:28, height:1, background:"var(--gold)", margin:"1rem auto" }} />
+            </motion.div>
+            <motion.div 
+              style={{ width:28, height:1, background:"var(--gold)", margin:"1rem auto" }}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once:true }}
+              transition={{ delay: i*0.1 + 0.2, duration: 0.6 }}
+              whileHover={{ scaleX: 1.3 }}
+            />
             <span style={{ fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"rgba(249,245,238,0.4)", fontWeight:500 }}>{s.label}</span>
           </motion.div>
         ))}
@@ -423,7 +489,7 @@ const Stats = () => {
    ABOUT — watermark fixed at bottom, very faint
 ───────────────────────────────────────────── */
 const About = () => (
-  <section id="about" style={{ padding:"9rem 2rem 10rem", background:"var(--cream)", position:"relative", overflow:"hidden" }}>
+  <section id="about" className="section-pad" style={{ padding:"clamp(5rem, 8vw, 9rem) 1.5rem clamp(6rem, 8vw, 10rem)", background:"var(--cream)", position:"relative", overflow:"hidden" }}>
 
     {/* Watermark — bottom of section, stroke-only, near-invisible */}
     <div className="soul-watermark">Our Soul</div>
@@ -456,10 +522,13 @@ const About = () => (
       >
         {["Weddings","Corporate Events","Sangeet Nights","Birthday Galas","Engagements","Product Launches","Award Ceremonies","Cultural Festivals"].map((tag,i) => (
           <motion.span key={i}
-            initial={{ opacity:0, scale:0.85 }} whileInView={{ opacity:1, scale:1 }}
-            viewport={{ once:true }} transition={{ delay:0.5+i*0.05, duration:0.4 }}
+            initial={{ opacity:0, scale:0.85, y: 10 }} 
+            whileInView={{ opacity:1, scale:1, y: 0 }}
+            viewport={{ once:true }} 
+            transition={{ delay:0.5+i*0.05, duration:0.4 }}
             style={{ fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", fontWeight:500, border:"1px solid rgba(201,168,76,0.3)", color:"var(--muted)", padding:"7px 16px", transition:"all 0.3s", cursor:"default" }}
-            whileHover={{ borderColor:"var(--gold)", color:"var(--gold)", scale:1.04 }}
+            whileHover={{ borderColor:"var(--gold)", color:"var(--gold)", scale:1.04, y: -4 }}
+            animate={{ y: [0, -3, 0] }}
           >{tag}</motion.span>
         ))}
       </motion.div>
@@ -480,9 +549,9 @@ const Services = () => {
     { title:"Impeccable Hospitality",desc:"Personalized guest management ensuring everyone feels like royalty." },
   ];
   return (
-    <section id="services" style={{ padding:"8rem 2rem", background:"#fff" }}>
+    <section id="services" className="section-pad" style={{ padding:"clamp(5rem, 8vw, 8rem) 1.5rem", background:"#fff" }}>
       <div style={{ maxWidth:1200, margin:"0 auto" }}>
-        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"5rem", flexWrap:"wrap", gap:"2rem" }}>
+        <div className="header-mb" style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"5rem", flexWrap:"wrap", gap:"2rem" }}>
           <div>
             <motion.span initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }}
               style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1rem" }}>
@@ -499,16 +568,33 @@ const Services = () => {
           </motion.p>
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"1.5px", background:"rgba(201,168,76,0.12)" }}>
+        <div className="services-grid" style={{ background:"rgba(201,168,76,0.12)" }}>
           {services.map((s,i) => (
             <motion.div key={i} className="srv-card"
-              initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
-              viewport={{ once:true, margin:"-50px" }} transition={{ delay:(i%3)*0.1, duration:0.6 }}
-              style={{ background:"#fff", padding:"3rem 2.5rem", cursor:"default" }}
+              initial={{ opacity:0, y:20, rotateX: -10 }} 
+              whileInView={{ opacity:1, y:0, rotateX: 0 }}
+              viewport={{ once:true, margin:"-50px" }} 
+              transition={{ delay:(i%3)*0.1, duration:0.6, type:"spring", stiffness:100 }}
+              whileHover={{ scale:1.02, transition: { duration: 0.3 } }}
+              style={{ background:"#fff", padding:"3rem 2.5rem", cursor:"default", perspective: "1000px" }}
             >
-              <span className="serif" style={{ fontSize:"1rem", color:"var(--gold)", display:"block", marginBottom:"1.5rem", letterSpacing:"0.1em" }}>0{i+1}</span>
-              <h3 className="serif" style={{ fontSize:"1.4rem", color:"var(--charcoal)", marginBottom:"1rem", fontWeight:400, letterSpacing:"0.05em", textTransform:"uppercase" }}>{s.title}</h3>
-              <p style={{ fontSize:"0.85rem", color:"var(--muted)", lineHeight:1.85, fontWeight:300 }}>{s.desc}</p>
+              <motion.span 
+                className="serif" 
+                style={{ fontSize:"1rem", color:"var(--gold)", display:"block", marginBottom:"1.5rem", letterSpacing:"0.1em" }}
+                whileHover={{ scale: 1.2, color: "var(--gold-light)" }}
+                transition={{ duration: 0.3 }}
+              >0{i+1}</motion.span>
+              <motion.h3 
+                className="serif" 
+                style={{ fontSize:"1.4rem", color:"var(--charcoal)", marginBottom:"1rem", fontWeight:400, letterSpacing:"0.05em", textTransform:"uppercase" }}
+                whileHover={{ color: "var(--gold)", letterSpacing: "0.1em" }}
+                transition={{ duration: 0.3 }}
+              >{s.title}</motion.h3>
+              <motion.p 
+                style={{ fontSize:"0.85rem", color:"var(--muted)", lineHeight:1.85, fontWeight:300 }}
+                whileHover={{ color: "var(--charcoal)" }}
+                transition={{ duration: 0.3 }}
+              >{s.desc}</motion.p>
             </motion.div>
           ))}
         </div>
@@ -584,11 +670,11 @@ const Gallery = () => {
   const visible = filter === "all" ? media : media.filter(m => m.type === filter);
 
   return (
-    <section id="gallery" style={{ padding:"8rem 2rem", background:"var(--charcoal)" }}>
+    <section id="gallery" className="section-pad" style={{ padding:"clamp(5rem, 8vw, 8rem) 1.5rem", background:"var(--charcoal)" }}>
       <div style={{ maxWidth:1200, margin:"0 auto" }}>
 
         {/* Header */}
-        <div style={{ textAlign:"center", marginBottom:"4rem" }}>
+        <div className="header-mb" style={{ textAlign:"center", marginBottom:"4rem" }}>
           <motion.span initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }}
             style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1rem" }}>
             Visual Stories
@@ -616,24 +702,45 @@ const Gallery = () => {
             {visible.map((item,i) => (
               <motion.div key={item.label} className="gal-item"
                 layout
-                initial={{ opacity:0, scale:0.92 }} animate={{ opacity:1, scale:1 }} exit={{ opacity:0, scale:0.92 }}
-                transition={{ duration:0.5, delay:i*0.05 }}
+                initial={{ opacity:0, scale:0.8, rotate: -5 }} 
+                animate={{ opacity:1, scale:1, rotate: 0 }} 
+                exit={{ opacity:0, scale:0.8, rotate: 5 }}
+                transition={{ duration:0.5, delay:i*0.05, type:"spring", stiffness:120 }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
                 onClick={() => setLightbox(item)}
                 style={{ position:"relative", overflow:"hidden", cursor:"pointer", aspectRatio:"4/5" }}
               >
-                <img src={item.src} alt={item.label} className="gal-img"
-                  style={{ width:"100%", height:"100%", objectFit:"cover", opacity:0.82 }} />
+                <motion.img src={item.src} alt={item.label} className="gal-img"
+                  style={{ width:"100%", height:"100%", objectFit:"cover", opacity:0.82 }}
+                  whileHover={{ opacity: 1, scale: 1.1 }}
+                  transition={{ duration: 0.4 }}
+                />
 
                 {/* Hover overlay */}
-                <div className="gal-overlay" style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(10,8,6,0.85) 0%,transparent 55%)", display:"flex", flexDirection:"column", justifyContent:"flex-end", padding:"1.5rem" }}>
-                  <span style={{ color:"#F9F5EE", fontFamily:"'Cormorant Garamond',serif", fontStyle:"italic", fontSize:"1rem" }}>{item.label}</span>
-                </div>
+                <motion.div 
+                  className="gal-overlay" 
+                  style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(10,8,6,0.85) 0%,transparent 55%)", display:"flex", flexDirection:"column", justifyContent:"flex-end", padding:"1.5rem" }}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.span 
+                    style={{ color:"#F9F5EE", fontFamily:"'Cormorant Garamond',serif", fontStyle:"italic", fontSize:"1rem" }}
+                    initial={{ y: 10 }}
+                    whileHover={{ y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >{item.label}</motion.span>
+                </motion.div>
 
                 {/* Video play button — always visible */}
                 {item.type === "video" && (
-                  <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:52, height:52, borderRadius:"50%", border:"1.5px solid rgba(249,245,238,0.7)", display:"flex", alignItems:"center", justifyContent:"center", background:"rgba(0,0,0,0.3)", backdropFilter:"blur(4px)", pointerEvents:"none" }}>
+                  <motion.div 
+                    style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:52, height:52, borderRadius:"50%", border:"1.5px solid rgba(249,245,238,0.7)", display:"flex", alignItems:"center", justifyContent:"center", background:"rgba(0,0,0,0.3)", backdropFilter:"blur(4px)", pointerEvents:"none" }}
+                    whileHover={{ scale: 1.15, background: "rgba(0,0,0,0.5)" }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <Play size={18} fill="#F9F5EE" color="#F9F5EE" style={{ marginLeft:3 }} />
-                  </div>
+                  </motion.div>
                 )}
               </motion.div>
             ))}
@@ -704,44 +811,88 @@ const Testimonials = () => {
   useEffect(() => {
     const t = setInterval(() => setActive(a => (a+1) % reviews.length), 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [reviews.length]);
 
   return (
-    <section style={{ padding:"8rem 2rem", background:"var(--cream)" }}>
+    <section className="section-pad" style={{ padding:"clamp(5rem, 8vw, 8rem) 1.5rem", background:"var(--cream)" }}>
       <div style={{ maxWidth:780, margin:"0 auto", textAlign:"center" }}>
         <motion.span initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }}
           style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1rem" }}>
           Words of Love
         </motion.span>
         <motion.h2 initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}
-          className="serif" style={{ fontSize:"clamp(2rem,4vw,3rem)", fontWeight:300, color:"var(--charcoal)", marginBottom:"4rem" }}>
+          className="serif header-mb" style={{ fontSize:"clamp(2rem,4vw,3rem)", fontWeight:300, color:"var(--charcoal)", marginBottom:"4rem" }}>
           Client <span style={{ fontStyle:"italic", color:"var(--gold)" }}>Stories</span>
         </motion.h2>
 
         <div style={{ minHeight:280, position:"relative" }}>
           <AnimatePresence mode="wait">
             <motion.div key={active}
-              initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-20 }}
-              transition={{ duration:0.55 }}
+              initial={{ opacity:0, y:20, rotateX: -15 }} 
+              animate={{ opacity:1, y:0, rotateX: 0 }} 
+              exit={{ opacity:0, y:-20, rotateX: 15 }}
+              transition={{ duration:0.6, type:"spring", stiffness:100 }}
+              style={{ perspective: "1000px" }}
             >
-              <div style={{ fontSize:40, color:"var(--gold)", opacity:0.25, marginBottom:"1.5rem", fontFamily:"'Cormorant Garamond',serif", lineHeight:1 }}>"</div>
-              <p className="serif" style={{ fontSize:"clamp(1.1rem,2.5vw,1.5rem)", color:"var(--charcoal)", lineHeight:1.75, fontStyle:"italic", fontWeight:300, marginBottom:"2rem" }}>
+              <motion.div 
+                style={{ fontSize:40, color:"var(--gold)", opacity:0.25, marginBottom:"1.5rem", fontFamily:"'Cormorant Garamond',serif", lineHeight:1 }}
+                animate={{ scale: [0.8, 1, 0.8], opacity: [0.15, 0.35, 0.15] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >&quot;</motion.div>
+              <motion.p 
+                className="serif" 
+                style={{ fontSize:"clamp(1.1rem,2.5vw,1.5rem)", color:"var(--charcoal)", lineHeight:1.75, fontStyle:"italic", fontWeight:300, marginBottom:"2rem" }}
+                initial={{ opacity: 0, letterSpacing: "0em" }}
+                whileInView={{ opacity: 1, letterSpacing: "0.02em" }}
+                transition={{ duration: 0.6 }}
+              >
                 {reviews[active].text}
-              </p>
-              <div style={{ display:"flex", justifyContent:"center", gap:4, marginBottom:"1rem" }}>
-                {[...Array(5)].map((_,j) => <Star key={j} size={14} fill="var(--gold)" color="var(--gold)" />)}
-              </div>
-              <p style={{ fontSize:"0.9rem", fontWeight:600, color:"var(--charcoal)", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:4 }}>{reviews[active].name}</p>
-              <p style={{ fontSize:"0.7rem", color:"var(--muted)", letterSpacing:"0.2em", textTransform:"uppercase" }}>{reviews[active].role}</p>
+              </motion.p>
+              <motion.div 
+                style={{ display:"flex", justifyContent:"center", gap:4, marginBottom:"1rem" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+              >
+                {[...Array(5)].map((_,j) => (
+                  <motion.div key={j} animate={{ scale: [1, 1.2, 1] }} transition={{ delay: j * 0.1, duration: 0.6 }}>
+                    <Star size={14} fill="var(--gold)" color="var(--gold)" />
+                  </motion.div>
+                ))}
+              </motion.div>
+              <motion.p 
+                style={{ fontSize:"0.9rem", fontWeight:600, color:"var(--charcoal)", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:4 }}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+              >{reviews[active].name}</motion.p>
+              <motion.p 
+                style={{ fontSize:"0.7rem", color:"var(--muted)", letterSpacing:"0.2em", textTransform:"uppercase" }}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
+              >{reviews[active].role}</motion.p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div style={{ display:"flex", justifyContent:"center", gap:10, marginTop:"2.5rem" }}>
+        <motion.div 
+          style={{ display:"flex", justifyContent:"center", gap:10, marginTop:"2.5rem" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
           {reviews.map((_,i) => (
-            <button key={i} onClick={() => setActive(i)} style={{ height:2, width:active===i ? 32 : 8, background:active===i ? "var(--gold)" : "rgba(201,168,76,0.25)", border:"none", cursor:"pointer", transition:"all 0.4s", borderRadius:2 }} />
+            <motion.button 
+              key={i} 
+              onClick={() => setActive(i)} 
+              style={{ height:2, width:active===i ? 32 : 8, background:active===i ? "var(--gold)" : "rgba(201,168,76,0.25)", border:"none", cursor:"pointer", transition:"all 0.4s", borderRadius:2 }}
+              whileHover={{ width: active === i ? 32 : 12 }}
+              animate={{ width: active===i ? 32 : 8 }}
+            />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -762,12 +913,12 @@ const Contact = () => {
   });
 
   return (
-    <section id="contact" style={{ padding:"8rem 2rem", background:"#fff", position:"relative", overflow:"hidden" }}>
+    <section id="contact" className="section-pad" style={{ padding:"clamp(5rem, 8vw, 8rem) 1.5rem", background:"#fff", position:"relative", overflow:"hidden" }}>
       <div className="two-col" style={{ maxWidth:1200, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5rem", alignItems:"start" }}>
 
-        {/* LEFT SIDE — unchanged */}
+        {/* LEFT SIDE */}
         <motion.div initial={{ opacity:0, x:-28 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.8 }}>
-          <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1.25rem" }}>Let's Connect</span>
+          <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1.25rem" }}>Let&apos;s Connect</span>
           <h2 className="serif" style={{ fontSize:"clamp(2.5rem,5vw,4.5rem)", color:"var(--charcoal)", fontWeight:300, lineHeight:1.05, marginBottom:"1.5rem" }}>
             Ready to Craft<br /><span style={{ fontStyle:"italic", color:"var(--gold)" }}>Your Story?</span>
           </h2>
@@ -781,10 +932,15 @@ const Contact = () => {
             { icon:MapPin, label:"Visit Us",  val:"4th Floor, Sneh Aspire, Rewa (M.P.)" },
           ].map(({ icon:Icon, label, val },i) => (
             <motion.div key={i} initial={{ opacity:0, x:-16 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.15+i*0.1, duration:0.6 }}
-              style={{ display:"flex", alignItems:"center", gap:18, marginBottom:"1.75rem" }}>
-              <div style={{ width:44, height:44, borderRadius:"50%", border:"1px solid rgba(201,168,76,0.3)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--gold)", flexShrink:0 }}>
+              whileHover={{ scale: 1.03, x: 4 }}
+              style={{ display:"flex", alignItems:"center", gap:18, marginBottom:"1.75rem", cursor:"pointer" }}>
+              <motion.div 
+                style={{ width:44, height:44, borderRadius:"50%", border:"1px solid rgba(201,168,76,0.3)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--gold)", flexShrink:0 }}
+                whileHover={{ scale: 1.15, borderColor: "var(--gold)" }}
+                transition={{ duration: 0.3 }}
+              >
                 <Icon size={18} />
-              </div>
+              </motion.div>
               <div>
                 <p style={{ fontSize:9, color:"var(--muted)", textTransform:"uppercase", letterSpacing:"0.25em", marginBottom:3 }}>{label}</p>
                 <p className="serif" style={{ color:"var(--charcoal)", letterSpacing:"0.04em" }}>{val}</p>
@@ -799,11 +955,16 @@ const Contact = () => {
           whileInView={{ opacity:1, x:0 }}
           viewport={{ once:true }}
           transition={{ duration:0.8 }}
-          style={{ background:"var(--cream)", padding:"3.5rem", boxShadow:"0 20px 60px -20px rgba(0,0,0,0.08)" }}
+          className="contact-card"
+          style={{ background:"var(--cream)", padding:"clamp(2rem, 5vw, 3.5rem)", boxShadow:"0 20px 60px -20px rgba(0,0,0,0.08)" }}
         >
           {sent ? (
             <motion.div initial={{ opacity:0, scale:0.9 }} animate={{ opacity:1, scale:1 }} style={{ textAlign:"center", padding:"3rem 0" }}>
-              <div style={{ fontSize:48, marginBottom:"1.5rem", color:"var(--gold)" }}>✦</div>
+              <motion.div 
+                style={{ fontSize:48, marginBottom:"1.5rem", color:"var(--gold)" }}
+                animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >✦</motion.div>
               <h3 className="serif" style={{ fontSize:"2rem", color:"var(--charcoal)", fontWeight:300, fontStyle:"italic", marginBottom:"1rem" }}>
                 Message Received!
               </h3>
@@ -812,20 +973,30 @@ const Contact = () => {
               </p>
             </motion.div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display:"flex", flexDirection:"column", gap:"1.75rem" }}>
+            <motion.form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display:"flex", flexDirection:"column", gap:"1.75rem" }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
 
               {/* FIRST + LAST */}
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1.5rem" }}>
+              <div className="contact-name-row">
                 {[["First Name","first"],["Last Name","last"]].map(([lbl,key]) => {
                   const typedKey = key as keyof FormType;
 
                   return (
-                    <div key={key}>
+                    <motion.div 
+                      key={key}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 }}
+                    >
                       <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
                         {lbl}
                       </label>
 
-                      <input
+                      <motion.input
                         type="text"
                         value={form[typedKey]}
                         onChange={(e) =>
@@ -834,23 +1005,30 @@ const Contact = () => {
                         style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
                         onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
                         onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                        whileHover={{ letterSpacing: "0.05em" }}
                       />
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
 
               {/* EMAIL + EVENT */}
-              {[["Email Address","email","email"],["Event Type & Date","event","text"]].map(([lbl,key,type]) => {
+              {[["Email Address","email","email"],["Event Type & Date","event","text"]].map(([lbl,key,type],idx) => {
                 const typedKey = key as keyof FormType;
 
                 return (
-                  <div key={key}>
+                  <motion.div 
+                    key={key}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 + idx * 0.05 }}
+                  >
                     <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
                       {lbl}
                     </label>
 
-                    <input
+                    <motion.input
                       type={type as string}
                       value={form[typedKey]}
                       onChange={(e) =>
@@ -859,18 +1037,24 @@ const Contact = () => {
                       style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
                       onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
                       onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                      whileHover={{ letterSpacing: "0.05em" }}
                     />
-                  </div>
+                  </motion.div>
                 );
               })}
 
               {/* MESSAGE */}
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25 }}
+              >
                 <label style={{ display:"block", fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--muted)", marginBottom:8 }}>
                   Message
                 </label>
 
-                <textarea
+                <motion.textarea
                   rows={4}
                   value={form.message}
                   onChange={(e) =>
@@ -879,13 +1063,15 @@ const Contact = () => {
                   style={{ width:"100%", background:"transparent", border:"none", borderBottom:"1px solid rgba(26,26,26,0.15)", padding:"8px 0", fontSize:14, color:"var(--charcoal)", outline:"none", resize:"none", fontFamily:"'Jost',sans-serif", transition:"border-color 0.3s" }}
                   onFocus={(e) => (e.currentTarget.style.borderBottomColor = "var(--gold)")}
                   onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(26,26,26,0.15)")}
+                  whileHover={{ letterSpacing: "0.05em" }}
                 />
-              </div>
+              </motion.div>
 
               {/* BUTTON */}
               <motion.button
                 type="submit"
-                whileHover={{ letterSpacing:"0.45em" }}
+                whileHover={{ letterSpacing:"0.45em", scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 style={{ width:"100%", padding:"15px", background:"var(--charcoal)", color:"var(--cream)", border:"none", cursor:"pointer", fontSize:10, letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600, transition:"background 0.3s", fontFamily:"'Jost',sans-serif" }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--gold)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--charcoal)")}
@@ -893,7 +1079,7 @@ const Contact = () => {
                 Send Inquiry
               </motion.button>
 
-            </form>
+            </motion.form>
           )}
         </motion.div>
       </div>
@@ -905,12 +1091,12 @@ const Contact = () => {
    FOOTER — no Instagram icon (placeholder ✦)
 ───────────────────────────────────────────── */
 const Footer = () => (
-  <footer style={{ background:"var(--charcoal)", color:"#F9F5EE", padding:"6rem 2rem 2.5rem", borderTop:"1px solid rgba(249,245,238,0.06)" }}>
+  <footer className="footer-pad" style={{ background:"var(--charcoal)", color:"#F9F5EE", padding:"clamp(3.5rem, 7vw, 6rem) 1.5rem 2.5rem", borderTop:"1px solid rgba(249,245,238,0.06)" }}>
     <div style={{ maxWidth:1200, margin:"0 auto" }}>
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:"3rem", marginBottom:"4rem" }}>
+      <div className="footer-grid" style={{ marginBottom:"clamp(2.5rem, 5vw, 4rem)" }}>
 
-        <div style={{ gridColumn:"span 2" }}>
-          <h3 className="serif" style={{ fontSize:36, letterSpacing:"0.25em", marginBottom:"1rem", color:"var(--gold)", fontWeight:400 }}>VISTARA</h3>
+        <div className="footer-brand" style={{ gridColumn:"span 2" }}>
+          <h3 className="serif footer-title" style={{ fontSize:36, letterSpacing:"0.25em", marginBottom:"1rem", color:"var(--gold)", fontWeight:400 }}>VISTARA</h3>
           <div style={{ width:36, height:1, background:"var(--gold)", marginBottom:"1.5rem" }} />
           <p style={{ color:"rgba(249,245,238,0.4)", fontSize:"0.87rem", lineHeight:1.9, fontWeight:300, fontStyle:"italic", maxWidth:320, marginBottom:"2rem" }}>
             The premier event management firm serving Rewa, Satna, Sidhi, and Jabalpur, specializing in luxury weddings, corporate excellence, and every celebration in between.
