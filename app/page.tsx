@@ -766,7 +766,7 @@ const Gallery = () => {
         <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.7, delay:0.3 }}
           style={{ marginTop:"3.5rem", display:"flex", justifyContent:"center", alignItems:"center", gap:"2.5rem", flexWrap:"wrap" }}>
 
-          <a href="https://instagram.com/vistaraevents" target="_blank" rel="noreferrer"
+          <a href="https://www.instagram.com/vistaraevent/" target="_blank" rel="noopener noreferrer" aria-label="Visit Vistara Events on Instagram"
             style={{ display:"inline-flex", alignItems:"center", gap:10, fontSize:10, letterSpacing:"0.3em", textTransform:"uppercase", fontWeight:600, color:"var(--gold)", border:"1px solid rgba(201,168,76,0.35)", padding:"11px 28px", textDecoration:"none", transition:"all 0.3s" }}
             onMouseEnter={e => { e.currentTarget.style.background="var(--gold)"; e.currentTarget.style.color="#fff"; }}
             onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.color="var(--gold)"; }}
@@ -1173,15 +1173,40 @@ const Footer = () => (
           <p style={{ color:"rgba(249,245,238,0.4)", fontSize:"0.87rem", lineHeight:1.9, fontWeight:300, fontStyle:"italic", maxWidth:320, marginBottom:"2rem" }}>
             The best event management company &amp; wedding planner in Rewa, Madhya Pradesh — proudly serving Rewa, Satna, Sidhi, Jabalpur and the wider Vindhya region with luxury weddings, corporate galas and bespoke celebrations.
           </p>
-          {/* Social icons — placeholder spots, Instagram to be added later */}
+          {/* Social icons */}
           <div style={{ display:"flex", gap:"0.75rem" }}>
-            {[Mail, Phone].map((Icon,i) => (
-              <motion.a key={i} href="#" whileHover={{ y:-4 }}
-                style={{ width:40, height:40, border:"1px solid rgba(249,245,238,0.12)", display:"flex", alignItems:"center", justifyContent:"center", color:"rgba(249,245,238,0.4)", transition:"all 0.3s", textDecoration:"none" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor="var(--gold)"; e.currentTarget.style.color="var(--gold)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(249,245,238,0.12)"; e.currentTarget.style.color="rgba(249,245,238,0.4)"; }}
-              ><Icon size={14} /></motion.a>
-            ))}
+            <motion.a
+              href="https://www.instagram.com/vistaraevent/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Vistara Events on Instagram"
+              whileHover={{ y:-4 }}
+              style={{ width:40, height:40, border:"1px solid rgba(249,245,238,0.12)", display:"flex", alignItems:"center", justifyContent:"center", color:"rgba(249,245,238,0.4)", transition:"all 0.3s", textDecoration:"none" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor="var(--gold)"; e.currentTarget.style.color="var(--gold)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(249,245,238,0.12)"; e.currentTarget.style.color="rgba(249,245,238,0.4)"; }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </motion.a>
+            <motion.a
+              href="mailto:hello@vistaraevents.com"
+              aria-label="Email Vistara Events"
+              whileHover={{ y:-4 }}
+              style={{ width:40, height:40, border:"1px solid rgba(249,245,238,0.12)", display:"flex", alignItems:"center", justifyContent:"center", color:"rgba(249,245,238,0.4)", transition:"all 0.3s", textDecoration:"none" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor="var(--gold)"; e.currentTarget.style.color="var(--gold)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(249,245,238,0.12)"; e.currentTarget.style.color="rgba(249,245,238,0.4)"; }}
+            ><Mail size={14} /></motion.a>
+            <motion.a
+              href="tel:+919179999927"
+              aria-label="Call Vistara Events"
+              whileHover={{ y:-4 }}
+              style={{ width:40, height:40, border:"1px solid rgba(249,245,238,0.12)", display:"flex", alignItems:"center", justifyContent:"center", color:"rgba(249,245,238,0.4)", transition:"all 0.3s", textDecoration:"none" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor="var(--gold)"; e.currentTarget.style.color="var(--gold)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(249,245,238,0.12)"; e.currentTarget.style.color="rgba(249,245,238,0.4)"; }}
+            ><Phone size={14} /></motion.a>
           </div>
         </div>
 

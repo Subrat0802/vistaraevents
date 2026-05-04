@@ -201,7 +201,7 @@ export default function RootLayout({
       },
     ],
     sameAs: [
-      "https://instagram.com/vistaraevents",
+      "https://www.instagram.com/vistaraevent/",
     ],
     areaServed: [
       { "@type": "City", name: "Rewa", "@id": "https://www.wikidata.org/wiki/Q1502028" },
