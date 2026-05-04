@@ -390,6 +390,7 @@ const Hero = () => {
           alt="Vistara Events – luxury wedding and event management company in Rewa, Satna, Sidhi & Jabalpur, Madhya Pradesh"
           loading="eager"
           decoding="async"
+          fetchPriority="high"
           style={{ width:"100%", height:"115%", objectFit:"cover", opacity:0.52 }}
         />
       </motion.div>
