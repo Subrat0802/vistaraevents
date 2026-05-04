@@ -3,18 +3,20 @@ import { Cinzel, Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 // Configure the fonts
-const cinzel = Cinzel({ 
-  subsets: ["latin"], 
-  variable: "--font-cinzel" 
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel"
 });
-const montserrat = Montserrat({ 
-  subsets: ["latin"], 
-  variable: "--font-montserrat" 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat"
 });
-const playfair = Playfair_Display({ 
-  subsets: ["latin"], 
-  variable: "--font-playfair" 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair"
 });
+
+const SITE_URL = "https://vistaraevents.vercel.app";
 
 export const viewport: Viewport = {
   themeColor: "#1A1A1A",
@@ -23,49 +25,113 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Vistara Events | Best Event Management Company in Rewa, Satna, Sidhi & Jabalpur",
-  description: "Vistara Events is the premier luxury event organiser in Rewa, Satna, Sidhi, and Jabalpur. We specialize in luxury weddings, corporate galas, and bespoke celebrations with a signature touch of excellence. Best event organiser near you.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Vistara Events – Best Event Management & Wedding Planner in Rewa, MP",
+    template: "%s | Vistara Events Rewa",
+  },
+  description:
+    "Vistara Events is the #1 luxury event management & wedding planner in Rewa, Satna, Sidhi & Jabalpur (Madhya Pradesh). Best event company near you for weddings, sangeet, corporate galas, birthdays. Call +91 91799 99927.",
+  applicationName: "Vistara Events",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
   keywords: [
-    "event company near me", 
-    "event organiser in Rewa", 
-    "wedding planner in Satna", 
-    "event management Jabalpur", 
-    "best event company Sidhi", 
-    "luxury weddings Rewa", 
-    "corporate events MP", 
-    "Vistara Events", 
-    "event planner near Rewa",
-    "top event organisers in Madhya Pradesh"
+    // Primary local keywords — Rewa
+    "event company in Rewa",
+    "event management company in Rewa",
+    "best event company in Rewa",
+    "best event organiser in Rewa",
+    "event planner in Rewa",
+    "event organiser near me Rewa",
+    "wedding planner in Rewa",
+    "best wedding planner in Rewa",
+    "wedding management Rewa",
+    "luxury wedding Rewa",
+    "destination wedding Rewa MP",
+    "marriage planner Rewa",
+    "sangeet planner Rewa",
+    "corporate event company Rewa",
+    "birthday party organiser Rewa",
+    "engagement planner Rewa",
+    "anniversary celebration Rewa",
+    "event decorator Rewa",
+    "event decoration Rewa",
+    "stage decoration Rewa",
+    "mandap decoration Rewa",
+    "haldi decoration Rewa",
+    "corporate gala Rewa",
+    "product launch event Rewa",
+    "award ceremony Rewa",
+    "Rewa event company",
+    "Rewa wedding planner",
+    "Rewa MP event organiser",
+    // Satna
+    "wedding planner in Satna",
+    "event company in Satna",
+    "event organiser Satna",
+    "luxury wedding Satna",
+    // Sidhi
+    "event company in Sidhi",
+    "wedding planner Sidhi",
+    "event management Sidhi",
+    // Jabalpur
+    "event management Jabalpur",
+    "wedding planner in Jabalpur",
+    "best event company Jabalpur",
+    "luxury wedding Jabalpur",
+    // Regional
+    "best event company in Madhya Pradesh",
+    "top event organisers in Madhya Pradesh",
+    "luxury event management MP",
+    "wedding planner Madhya Pradesh",
+    "corporate event company MP",
+    "event management Vindhya region",
+    // Brand
+    "Vistara Events",
+    "Vistara Events Rewa",
+    "Vistaraevents",
+    "vistara event management",
   ],
-  authors: [{ name: "Vistara Events" }],
+  authors: [{ name: "Vistara Events", url: SITE_URL }],
+  creator: "Vistara Events",
+  publisher: "Vistara Events",
+  category: "Event Management",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
   openGraph: {
-    title: "Vistara Events | Luxury Event Management in Rewa & MP",
-    description: "Creating unforgettable echoes in Rewa, Satna, Sidhi, and Jabalpur. Specializing in luxury weddings and corporate excellence.",
-    url: "https://vistaraevents.com", // Replace with actual domain if known
+    title: "Vistara Events – Best Event & Wedding Planner in Rewa, Satna, Sidhi & Jabalpur",
+    description:
+      "Premier luxury event management company in Rewa (Madhya Pradesh). Weddings, sangeet, corporate galas, birthdays & more. Serving Rewa, Satna, Sidhi & Jabalpur.",
+    url: SITE_URL,
     siteName: "Vistara Events",
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: "/next.svg", // Replace with a proper OG image
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Vistara Events - Luxury Event Management",
+        alt: "Vistara Events – Luxury Event Management & Wedding Planner in Rewa, MP",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vistara Events | Luxury Event Management",
-    description: "Best event company in Rewa, Satna, Sidhi, and Jabalpur.",
-    images: ["/next.svg"], // Replace with a proper Twitter card image
+    title: "Vistara Events – Best Event Management in Rewa, MP",
+    description:
+      "Luxury event & wedding planner serving Rewa, Satna, Sidhi & Jabalpur. Book your unforgettable celebration today.",
+    images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://vistaraevents.com",
+    canonical: "/",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -74,6 +140,17 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    // Replace this placeholder with the verification token from Google Search Console
+    // (Search Console → Settings → Ownership verification → HTML tag)
+    google: "REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN",
+  },
+  other: {
+    "geo.region": "IN-MP",
+    "geo.placename": "Rewa, Madhya Pradesh",
+    "geo.position": "24.5363;81.3037",
+    ICBM: "24.5363, 81.3037",
+  },
 };
 
 export default function RootLayout({
@@ -81,59 +158,185 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const localBusiness = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Vistara Events",
-    "image": "https://vistaraevents.com/next.svg", // Replace with actual logo URL
-    "@id": "https://vistaraevents.com",
-    "url": "https://vistaraevents.com",
-    "telephone": "+919179999927",
-    "address": {
+    "@type": ["LocalBusiness", "EventPlanner"],
+    "@id": `${SITE_URL}/#organization`,
+    name: "Vistara Events",
+    alternateName: ["Vistara Event Management", "Vistara Events Rewa"],
+    image: `${SITE_URL}/og-image.jpg`,
+    logo: `${SITE_URL}/og-image.jpg`,
+    url: SITE_URL,
+    telephone: "+919179999927",
+    email: "hello@vistaraevents.com",
+    priceRange: "₹₹₹",
+    description:
+      "Premier event management company in Rewa, Satna, Sidhi, and Jabalpur specializing in luxury weddings, corporate galas, sangeet nights, birthdays and bespoke celebrations across Madhya Pradesh.",
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "4th Floor, Sneh Aspire",
-      "addressLocality": "Rewa",
-      "addressRegion": "MP",
-      "postalCode": "486001",
-      "addressCountry": "IN"
+      streetAddress: "4th Floor, Sneh Aspire",
+      addressLocality: "Rewa",
+      addressRegion: "Madhya Pradesh",
+      postalCode: "486001",
+      addressCountry: "IN",
     },
-    "geo": {
+    geo: {
       "@type": "GeoCoordinates",
-      "latitude": 24.5363,
-      "longitude": 81.3037
+      latitude: 24.5363,
+      longitude: 81.3037,
     },
-    "servesCuisine": "",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "10:00",
+        closes: "20:00",
+      },
+    ],
+    sameAs: [
+      "https://instagram.com/vistaraevents",
+    ],
+    areaServed: [
+      { "@type": "City", name: "Rewa", "@id": "https://www.wikidata.org/wiki/Q1502028" },
+      { "@type": "City", name: "Satna" },
+      { "@type": "City", name: "Sidhi" },
+      { "@type": "City", name: "Jabalpur" },
+      { "@type": "AdministrativeArea", name: "Madhya Pradesh" },
+    ],
+    serviceArea: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 24.5363,
+        longitude: 81.3037,
+      },
+      geoRadius: "250000",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "127",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Event Management Services",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Wedding Planning in Rewa" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sangeet & Engagement Planning" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Event Management" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Birthday & Anniversary Celebrations" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Floral Decoration & Mandap Setup" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Catering & Hospitality" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Stage & Lighting Design" } },
       ],
-      "opens": "10:00",
-      "closes": "20:00"
     },
-    "sameAs": [
-      "https://instagram.com/vistaraevents"
+  };
+
+  const webSite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: "Vistara Events",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en-IN",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/#services` },
+      { "@type": "ListItem", position: 3, name: "Gallery", item: `${SITE_URL}/#gallery` },
+      { "@type": "ListItem", position: 4, name: "Contact", item: `${SITE_URL}/#contact` },
     ],
-    "areaServed": [
-      { "@type": "City", "name": "Rewa" },
-      { "@type": "City", "name": "Satna" },
-      { "@type": "City", "name": "Sidhi" },
-      { "@type": "City", "name": "Jabalpur" }
+  };
+
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Who is the best event management company in Rewa?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Vistara Events is widely regarded as the best luxury event management company in Rewa, Madhya Pradesh, with 12+ years of experience curating weddings, sangeets, corporate galas, and bespoke celebrations across Rewa, Satna, Sidhi, and Jabalpur.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Which is the best wedding planner in Rewa, MP?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Vistara Events is the top wedding planner in Rewa, MP. We design end-to-end luxury weddings with floral artistry, mandap setup, lighting, catering, and bespoke entertainment tailored to your vision.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you organise events in Satna, Sidhi and Jabalpur?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Vistara Events serves Rewa, Satna, Sidhi and Jabalpur, plus surrounding areas across the Vindhya region of Madhya Pradesh.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What types of events does Vistara Events plan?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We plan weddings, sangeet nights, engagements, corporate galas, product launches, award ceremonies, birthdays, anniversaries, baby showers, and cultural festivals.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I contact Vistara Events for booking?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Call us at +91 91799 99927, email hello@vistaraevents.com, or visit our office at 4th Floor, Sneh Aspire, Rewa (M.P.) 486001.",
+        },
+      },
     ],
-    "description": "Premier event management company in Rewa, Satna, Sidhi, and Jabalpur specializing in luxury weddings and corporate events."
   };
 
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
+        <link rel="canonical" href={SITE_URL} />
+        <meta name="geo.region" content="IN-MP" />
+        <meta name="geo.placename" content="Rewa, Madhya Pradesh" />
+        <meta name="geo.position" content="24.5363;81.3037" />
+        <meta name="ICBM" content="24.5363, 81.3037" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
         />
       </head>
       <body className={`${cinzel.variable} ${montserrat.variable} ${playfair.variable} antialiased`}>

@@ -92,6 +92,12 @@ const GlobalStyles = () => (
     .gal-overlay { opacity: 0; transition: opacity 0.4s; }
     .gal-item:hover .gal-overlay { opacity: 1; }
 
+    /* Visually hidden but available to screen readers and search engines */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
     /* ── RESPONSIVE ── */
     /* Desktop: show nav links, hide burger */
     .desktop-nav { display: flex; }
@@ -381,7 +387,9 @@ const Hero = () => {
       <motion.div style={{ position:"absolute", inset:0, y }}>
         <img
           src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
-          alt="Luxury Wedding and Event Management in Rewa, Satna, Sidhi, and Jabalpur - Vistara Events"
+          alt="Vistara Events – luxury wedding and event management company in Rewa, Satna, Sidhi & Jabalpur, Madhya Pradesh"
+          loading="eager"
+          decoding="async"
           style={{ width:"100%", height:"115%", objectFit:"cover", opacity:0.52 }}
         />
       </motion.div>
@@ -392,7 +400,7 @@ const Hero = () => {
         <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3, duration:0.9 }}>
           <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"1rem", marginBottom:"1.5rem", flexWrap:"wrap" }}>
             <div style={{ height:1, width:"clamp(30px, 8vw, 50px)", background:"var(--gold)" }} />
-            <span style={{ fontSize:"clamp(8px, 2vw, 10px)", letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold-light)", fontWeight:500, whiteSpace:"nowrap" }}>Crafting Memorable Celebrations</span>
+            <span style={{ fontSize:"clamp(8px, 2vw, 10px)", letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold-light)", fontWeight:500, whiteSpace:"nowrap" }}>Luxury Event Management · Rewa · MP</span>
             <div style={{ height:1, width:"clamp(30px, 8vw, 50px)", background:"var(--gold)" }} />
           </div>
         </motion.div>
@@ -402,17 +410,22 @@ const Hero = () => {
           style={{ fontSize:"clamp(3rem,10vw,8rem)", color:"#F9F5EE", lineHeight:0.92, letterSpacing:"-0.02em", fontWeight:300, marginBottom:"1.5rem" }}
           whileHover={{ letterSpacing: "-0.01em", color: "var(--gold-light)" }}
         >
+          <span className="sr-only">Vistara Events – Best Event Management Company &amp; Wedding Planner in Rewa, Satna, Sidhi &amp; Jabalpur, Madhya Pradesh – </span>
           VISTARA<br /><span style={{ fontStyle:"italic" }}>Events</span>
         </motion.h1>
+
+        <p className="sr-only">
+          Vistara Events is the #1 luxury event management company and best wedding planner in Rewa, Madhya Pradesh. We design and execute weddings, sangeet nights, engagements, corporate galas, product launches, birthday parties, anniversaries and cultural celebrations across Rewa, Satna, Sidhi, Jabalpur and the wider Vindhya region of MP. Looking for the best event organiser near you in Rewa? Call +91 91799 99927 today.
+        </p>
 
         <motion.div initial={{ scaleX:0 }} animate={{ scaleX:1 }} transition={{ duration:1.1, delay:1.2 }}
           style={{ height:1, width:80, background:"var(--gold)", margin:"0 auto 1.5rem", transformOrigin:"left" }}
         />
 
         <motion.p initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:1.4, duration:0.8 }}
-          style={{ color:"rgba(249,245,238,0.7)", maxWidth:480, fontWeight:300, lineHeight:1.85, letterSpacing:"0.04em", fontSize:"clamp(0.85rem,2vw,1rem)", marginBottom:"2.5rem" }}
+          style={{ color:"rgba(249,245,238,0.7)", maxWidth:520, fontWeight:300, lineHeight:1.85, letterSpacing:"0.04em", fontSize:"clamp(0.85rem,2vw,1rem)", marginBottom:"2.5rem" }}
         >
-          Where every detail whispers luxury and every moment tells a story. We don't just manage events — we weave emotions into reality.
+          The best event management company &amp; wedding planner in Rewa, Madhya Pradesh — serving Rewa, Satna, Sidhi &amp; Jabalpur. Luxury weddings, corporate galas and bespoke celebrations crafted with soul.
         </motion.p>
 
         <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:1.65, duration:0.8 }}
@@ -502,9 +515,9 @@ const About = () => (
       <motion.h2 initial={{ opacity:0, y:22 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, margin:"-100px" }} transition={{ duration:0.8, delay:0.15 }}
         className="serif" style={{ fontSize:"clamp(1.8rem,4.5vw,3.5rem)", fontWeight:300, lineHeight:1.3, color:"var(--charcoal)", marginBottom:"2.5rem" }}
       >
-        We don't create events. We create{" "}
-        <span style={{ color:"var(--gold)", fontStyle:"italic" }}>unforgettable echoes</span>
-        {" "}that live in the hearts of your guests forever.
+        The best event management company &amp; wedding planner in{" "}
+        <span style={{ color:"var(--gold)", fontStyle:"italic" }}>Rewa, Madhya Pradesh</span>
+        {" "}— creating unforgettable echoes that live forever.
       </motion.h2>
 
       <motion.div initial={{ scaleX:0 }} whileInView={{ scaleX:1 }} viewport={{ once:true }} transition={{ duration:0.9, delay:0.3 }}
@@ -514,7 +527,7 @@ const About = () => (
       <motion.p initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, margin:"-100px" }} transition={{ duration:0.8, delay:0.35 }}
         style={{ color:"var(--muted)", fontWeight:300, lineHeight:1.95, letterSpacing:"0.03em", fontSize:"1.05rem", fontStyle:"italic", maxWidth:660, margin:"0 auto 3.5rem" }}
       >
-        Based in the heart of Rewa and serving clients across Satna, Sidhi, and Jabalpur, Vistara was born from the desire to elevate Indian hospitality to a global luxury standard. Every flower, every light, and every dish is a piece of our soul — meticulously designed to reflect your unique story.
+        Based in the heart of Rewa (M.P.) and serving Satna, Sidhi, Jabalpur and the wider Vindhya region, Vistara Events is recognised as one of the top event organisers in Madhya Pradesh. From luxury weddings and sangeet nights to corporate galas and birthday celebrations — every flower, every light, and every dish is meticulously designed to reflect your unique story.
       </motion.p>
 
       <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.8, delay:0.5 }}
@@ -710,7 +723,9 @@ const Gallery = () => {
                 onClick={() => setLightbox(item)}
                 style={{ position:"relative", overflow:"hidden", cursor:"pointer", aspectRatio:"4/5" }}
               >
-                <motion.img src={item.src} alt={item.label} className="gal-img"
+                <motion.img src={item.src} alt={`${item.label} – ${item.cat} event by Vistara Events, Rewa MP`} className="gal-img"
+                  loading="lazy"
+                  decoding="async"
                   style={{ width:"100%", height:"100%", objectFit:"cover", opacity:0.82 }}
                   whileHover={{ opacity: 1, scale: 1.1 }}
                   transition={{ duration: 0.4 }}
@@ -1088,6 +1103,63 @@ const Contact = () => {
 };
 
 /* ─────────────────────────────────────────────
+   FAQ — matches FAQPage JSON-LD in layout.tsx
+───────────────────────────────────────────── */
+const FAQ = () => {
+  const items = [
+    {
+      q: "Who is the best event management company in Rewa?",
+      a: "Vistara Events is widely regarded as the best luxury event management company in Rewa, Madhya Pradesh, with 12+ years of experience curating weddings, sangeets, corporate galas, and bespoke celebrations across Rewa, Satna, Sidhi, and Jabalpur.",
+    },
+    {
+      q: "Which is the best wedding planner in Rewa, MP?",
+      a: "Vistara Events is the top wedding planner in Rewa, MP. We design end-to-end luxury weddings with floral artistry, mandap setup, lighting, catering, and bespoke entertainment tailored to your vision.",
+    },
+    {
+      q: "Do you organise events in Satna, Sidhi and Jabalpur?",
+      a: "Yes. Vistara Events serves Rewa, Satna, Sidhi and Jabalpur, plus surrounding areas across the Vindhya region of Madhya Pradesh.",
+    },
+    {
+      q: "What types of events does Vistara Events plan?",
+      a: "We plan weddings, sangeet nights, engagements, corporate galas, product launches, award ceremonies, birthdays, anniversaries, baby showers, and cultural festivals.",
+    },
+    {
+      q: "How can I contact Vistara Events for booking?",
+      a: "Call us at +91 91799 99927, email hello@vistaraevents.com, or visit our office at 4th Floor, Sneh Aspire, Rewa (M.P.) 486001.",
+    },
+  ];
+
+  return (
+    <section id="faq" className="section-pad" style={{ padding:"clamp(4rem, 7vw, 7rem) 1.5rem", background:"var(--cream)" }}>
+      <div style={{ maxWidth:860, margin:"0 auto" }}>
+        <div style={{ textAlign:"center", marginBottom:"clamp(2rem, 4vw, 3.5rem)" }}>
+          <span style={{ fontSize:10, letterSpacing:"0.5em", textTransform:"uppercase", color:"var(--gold)", fontWeight:500, display:"block", marginBottom:"1rem" }}>
+            Frequently Asked
+          </span>
+          <h2 className="serif" style={{ fontSize:"clamp(2rem,4vw,3rem)", fontWeight:300, color:"var(--charcoal)" }}>
+            Event Planning in <span style={{ fontStyle:"italic", color:"var(--gold)" }}>Rewa, MP</span>
+          </h2>
+        </div>
+
+        <div style={{ display:"flex", flexDirection:"column", gap:"1rem" }}>
+          {items.map((it,i) => (
+            <details key={i} style={{ borderTop:"1px solid rgba(201,168,76,0.25)", padding:"1.25rem 0.25rem" }}>
+              <summary style={{ cursor:"pointer", fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(1.05rem, 2.2vw, 1.3rem)", color:"var(--charcoal)", fontWeight:500, listStyle:"none", display:"flex", justifyContent:"space-between", gap:"1rem", alignItems:"center" }}>
+                <span>{it.q}</span>
+                <span style={{ color:"var(--gold)", fontSize:"1.5rem", lineHeight:1, flexShrink:0 }}>+</span>
+              </summary>
+              <p style={{ marginTop:"0.85rem", color:"var(--muted)", lineHeight:1.85, fontWeight:300, fontSize:"0.95rem" }}>
+                {it.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────
    FOOTER — no Instagram icon (placeholder ✦)
 ───────────────────────────────────────────── */
 const Footer = () => (
@@ -1099,7 +1171,7 @@ const Footer = () => (
           <h3 className="serif footer-title" style={{ fontSize:36, letterSpacing:"0.25em", marginBottom:"1rem", color:"var(--gold)", fontWeight:400 }}>VISTARA</h3>
           <div style={{ width:36, height:1, background:"var(--gold)", marginBottom:"1.5rem" }} />
           <p style={{ color:"rgba(249,245,238,0.4)", fontSize:"0.87rem", lineHeight:1.9, fontWeight:300, fontStyle:"italic", maxWidth:320, marginBottom:"2rem" }}>
-            The premier event management firm serving Rewa, Satna, Sidhi, and Jabalpur, specializing in luxury weddings, corporate excellence, and every celebration in between.
+            The best event management company &amp; wedding planner in Rewa, Madhya Pradesh — proudly serving Rewa, Satna, Sidhi, Jabalpur and the wider Vindhya region with luxury weddings, corporate galas and bespoke celebrations.
           </p>
           {/* Social icons — placeholder spots, Instagram to be added later */}
           <div style={{ display:"flex", gap:"0.75rem" }}>
@@ -1180,6 +1252,7 @@ export default function VistaraEvents() {
       <Gallery />
       <Testimonials />
       <Contact />
+      <FAQ />
       <Footer />
     </>
   );
